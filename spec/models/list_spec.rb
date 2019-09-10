@@ -26,9 +26,21 @@ RSpec.describe List, type: :model do
     List.create(user_id: User.last.id)
 
     expect(List.count).to eq(1)
-    expect(List.last.title).to eq('Nouvelle Liste')
 
     List.last.destroy
     expect(List.count).to eq(0)
+  end
+
+  it 'DESTROY List with Task association' do
+    User.create(email: 'test@gmail.com', password: 'azerty123')
+    List.create(user_id: User.last.id)
+    Task.create(name: 'my task', list_id: List.last.id)
+
+    expect(List.count).to eq(1)
+    expect(Task.count).to eq(1)
+
+    List.last.destroy
+    expect(List.count).to eq(0)
+    expect(Task.count).to eq(0)
   end
 end
