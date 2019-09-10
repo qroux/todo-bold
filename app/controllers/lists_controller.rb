@@ -8,8 +8,9 @@ class ListsController < ApplicationController
       @lists = List.where(user_id: current_user.id)
     end
 
-    # new List action inside index controller for ui purpose
+    # List and Task #new inside #index controller for ux purpose
     @list = List.new(title: '') # title: '' fix the simple_form placeholder
+    @task = Task.new(name: '')
   end
 
   def new
@@ -18,6 +19,7 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     @list.user_id = current_user.id
+    @list.title = 'Nouvelle liste' if @list.title == ''
     if @list.save
       redirect_to lists_path
     else
