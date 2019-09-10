@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_list, only: [:destroy]
 
   def index
     if current_user.admin == true
@@ -13,9 +14,6 @@ class ListsController < ApplicationController
     @task = Task.new(name: '')
   end
 
-  def new
-  end
-
   def create
     @list = List.new(list_params)
     @list.user_id = current_user.id
@@ -27,9 +25,22 @@ class ListsController < ApplicationController
     end
   end
 
+  def destroy
+    if @list.destroy
+      redirect_to lists_path
+    else
+      flash[:error] = "La liste n'a pu être supprimée"
+      redirect_to lists_path
+    end
+  end
+
   private
 
   def list_params
     params.require(:list).permit(:title)
+  end
+
+  def set_list
+    @list = List.find(params[:id])
   end
 end

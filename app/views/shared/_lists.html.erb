@@ -4,12 +4,21 @@
       <% if current_user.admin == true %>
         <%= list.title.capitalize %> - (<%= list.user.email %>) - list_id: <%= list.id %>
       <% else %>
-        <%= list.title.capitalize %> - n°<%= list.id %>
+        <%= list.title.capitalize %> - n°<%= list.id %> - <%= link_to 'supprimer', list_path(list.id), method: :delete, data: { confirm: 'Êtes vous sûr de vouloir supprimer cette liste ?'}  %>
       <% end %>
     </div>
     <ul class="list-group list-group-flush">
       <% list.tasks.each do |task|  %>
-        <li class="list-group-item"><%= task.name %></li>
+        <% if task.done == false %>
+          <%= simple_form_for(task, method: :patch, url: task_path(task.id)) do |f| %>
+            <%= f.input :name, label: false, placeholder: 'Modifier'%>
+            <%= f.hidden_field :id, value: "#{task.id}" %>
+            <%= f.submit style: "display: none" %>
+          <% end %>
+          <%= link_to 'done', done_task_path(task.id), method: :patch  %>
+        <% else %>
+          <li class="list-group-item"><del><%= task.name %></del> - <%= link_to 'undo', undo_task_path(task.id), method: :patch  %></li>
+        <% end %>
       <% end %>
       <%= simple_form_for @task, html: { class: "form-inline ml-auto", url: tasks_path} do |f| %>
         <%= f.input :name, label: false, placeholder: 'Ajouter tâche'%>
