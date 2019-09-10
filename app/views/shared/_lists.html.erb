@@ -1,0 +1,10 @@
+<% @lists.each do |list| %>
+  <div class="card" style="width: 500px;">
+    <div class="card-header text-center">
+      <%= list.title.capitalize %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <%= link_to '+ Ajouter tâche', root_path, class: 'list-group-item list-group-item-action list-group-item-success'   %>
+    </ul>
+  </div>
+<% end %>
