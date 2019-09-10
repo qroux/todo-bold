@@ -1,5 +1,5 @@
 <div class="create-list d-flex align-items-baseline p-5">
-  <%= simple_form_for [@list] do |f| %>
+  <%= simple_form_for @list, html: { class: "form-inline"} do |f| %>
     <%= f.input :title, label: false, placeholder: 'Ma nouvelle liste'%>
     <%= f.submit "Créer", class: "btn btn-success" %>
   <% end %>

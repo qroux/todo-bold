@@ -9,7 +9,7 @@ class ListsController < ApplicationController
     end
 
     # new List action inside index controller for ui purpose
-    @list = List.new(title: '') # fix the simple_form placeholder
+    @list = List.new(title: '') # title: '' fix the simple_form placeholder
   end
 
   def new
