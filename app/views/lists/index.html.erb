@@ -1,3 +1,12 @@
+<div class="create-list d-flex align-items-baseline p-5">
+  <%= simple_form_for [@list] do |f| %>
+    <%= f.input :title, label: false, placeholder: 'Ma nouvelle liste'%>
+    <%= f.submit "Créer", class: "btn btn-success" %>
+  <% end %>
+</div>
 <div class="list-style d-flex flex-wrap justify-content-around align-items-baseline">
   <%= render partial: 'shared/lists' %>
 </div>
+
+
+
