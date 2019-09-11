@@ -1,34 +1,26 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#admin user
 User.create(email: 'admin@gmail.com', password: 'azerty123', admin: true)
-User.create(email: 'user@gmail.com', password: 'azerty123')
 
-List.create(title: 'courses', user_id: User.last.id)
-Task.create(name: 'courses task 1', list_id: List.last.id)
-Task.create(name: 'courses task 2', list_id: List.last.id)
-Task.create(name: 'courses task 3', list_id: List.last.id)
+# user 1
+User.create(email: 'user1@gmail.com', password: 'azerty123')
+
+List.create(title: 'rendez vous', user_id: User.last.id)
+Task.create(name: 'a', list_id: List.last.id)
+Task.create(name: 'b', list_id: List.last.id)
+Task.create(name: 'c', list_id: List.last.id)
+
 List.create(title: 'procédure', user_id: User.last.id)
-Task.create(name: 'procédure task 1', list_id: List.last.id)
-List.create(user_id: User.last.id)
-List.create(title: 'courses', user_id: User.last.id)
-Task.create(name: 'courses task 1', list_id: List.last.id)
-Task.create(name: 'courses task 2', list_id: List.last.id)
-Task.create(name: 'courses task 3', list_id: List.last.id)
-List.create(title: 'courses', user_id: User.last.id)
-Task.create(name: 'courses task 1', list_id: List.last.id)
-Task.create(name: 'courses task 2', list_id: List.last.id)
-Task.create(name: 'courses task 3', list_id: List.last.id)
+Task.create(name: 'd', list_id: List.last.id)
 
-User.create(email: 'user2@gmail.com', password: 'azerty123')
-List.create(title: 'user 2 list', user_id: User.last.id)
-Task.create(name: 'task 1', list_id: List.last.id)
-Task.create(name: 'task 2', list_id: List.last.id)
-Task.create(name: 'task 3', list_id: List.last.id)
-List.create(title: 'user 2 list 2', user_id: User.last.id)
-Task.create(name: 'task 1', list_id: List.last.id)
 List.create(user_id: User.last.id)
+
+#user 2
+User.create(email: 'user2@gmail.com', password: 'azerty123')
+
+List.create(title: 'ma liste', user_id: User.last.id)
+Task.create(name: '1', list_id: List.last.id)
+Task.create(name: '2', list_id: List.last.id)
+Task.create(name: '3', list_id: List.last.id)
+
+List.create(title: 'autre liste', user_id: User.last.id)
+Task.create(name: '4', list_id: List.last.id)
