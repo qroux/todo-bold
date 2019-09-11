@@ -25,6 +25,13 @@ class TasksController < ApplicationController
     @task.done = true
     if @task.save
       redirect_to lists_path
+
+      # need to move this action as a sidekiq job for performance
+      tasks = Task.where(list_id: @task.list_id, done: false)
+
+      if tasks.count.zero?
+        UserMailer.with(user: current_user.id).congratulation.deliver_now
+      end
     else
       flash[:error] = "La tâche n'a pas été mise à jour"
       redirect_to lists_path
