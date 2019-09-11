@@ -25,6 +25,12 @@ class TasksController < ApplicationController
     @task.done = true
     if @task.save
       redirect_to lists_path
+
+      tasks = Task.where(list_id: @task.list_id, done: false)
+
+      if tasks.count.zero?
+        CongratulationJob.perform_later(current_user.id)
+      end
     else
       flash[:error] = "La tâche n'a pas été mise à jour"
       redirect_to lists_path
