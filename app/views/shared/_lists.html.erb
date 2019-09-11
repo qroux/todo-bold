@@ -1,20 +1,29 @@
 <% @lists.each do |list| %>
-  <div class="card mt-5" style="width: 500px;">
+  <div class="card m-5" style="width: 500px;">
     <div class="card-header text-center">
       <% if current_user.admin == true %>
-        <%= list.title.capitalize %> - (<%= list.user.email %>)
+        <%= list.title.capitalize %> - (<%= list.user.email %>) - list_id: <%= list.id %>
       <% else %>
-        <%= list.title.capitalize %>
+        <%= list.title.capitalize %> - n°<%= list.id %> - <%= link_to 'historique', list_path(list.id)  %> - <%= link_to 'supprimer', list_path(list.id), method: :delete, data: { confirm: 'Êtes vous sûr de vouloir supprimer cette liste ?'}  %>
       <% end %>
     </div>
     <ul class="list-group list-group-flush">
       <% list.tasks.each do |task|  %>
-        <li class="list-group-item"><%= task.name %></li>
+        <% if task.done == false %>
+          <%= simple_form_for(task, method: :patch, url: task_path(task.id)) do |f| %>
+            <%= f.input :name, label: false, placeholder: 'Modifier'%>
+            <%= f.hidden_field :id, value: "#{task.id}" %>
+            <%= f.submit style: "display: none" %>
+          <% end %>
+          <%= link_to 'done', done_task_path(task.id), method: :patch  %>
+        <% end %>
       <% end %>
-      <%= link_to '+ Ajouter tâche', root_path, class: 'list-group-item list-group-item-action list-group-item-success'   %>
+      <%= simple_form_for @task, html: { class: "form-inline ml-auto", url: tasks_path} do |f| %>
+        <%= f.input :name, label: false, placeholder: 'Ajouter tâche'%>
+        <%= f.hidden_field :list_id, value: "#{list.id}" %>
+        <%= f.submit "+", class: "btn btn-success" %>
+      <% end %>
     </ul>
   </div>
 <% end %>
-
-
 
