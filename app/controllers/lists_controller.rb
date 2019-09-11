@@ -1,17 +1,21 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_list, only: [:destroy]
+  before_action :set_list, only: [:show, :destroy]
 
   def index
     if current_user.admin == true
       @lists = List.all
     else
-      @lists = List.where(user_id: current_user.id)
+      @lists = List.where(user_id: current_user.id).includes(:tasks)
     end
 
     # List and Task #new inside #index controller for ux purpose
     @list = List.new(title: '') # title: '' fix the simple_form placeholder
     @task = Task.new(name: '')
+  end
+
+  def show
+    @tasks = @list.tasks.where(done: true)
   end
 
   def create

@@ -1,0 +1,18 @@
+<div class="list-background d-flex justify-content-center align-items-center">
+  <div class="card m-5" style="width: 500px;">
+    <div class="card-header text-center">
+      <% if current_user.admin == true %>
+        <%= @list.title.capitalize %> - (<%= @list.user.email %>) - list_id: <%= @list.id %>
+      <% else %>
+        <%= @list.title.capitalize %> - n°<%= @list.id %> - <%= link_to 'supprimer', list_path(@list), method: :delete, data: { confirm: 'Êtes vous sûr de vouloir supprimer définitivement cette liste et son historique ?'}  %>
+      <% end %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% @tasks.each do |task|  %>
+        <li class="list-group-item">
+          <del><%= task.name %></del> - fait le  <%= task.updated_at.strftime("%d/%m/%Y à %H:%M") %> <%= link_to 'undo', undo_task_path(task.id), method: :patch  %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

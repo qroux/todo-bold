@@ -1,11 +1,13 @@
-<div class="create-list d-flex flex-start p-5">
-  <%= simple_form_for @list, html: { class: "form-inline"} do |f| %>
-    <%= f.input :title, label: false, placeholder: 'Ma nouvelle liste'%>
-    <%= f.submit "Créer", class: "btn btn-success" %>
-  <% end %>
-</div>
-<div class="list-style d-flex flex-start flex-wrap align-items-baseline">
-  <%= render partial: 'shared/lists' %>
+<div class="list-background">
+  <div class="create-list d-flex flex-start p-5">
+    <%= simple_form_for @list, html: { class: "form-inline"} do |f| %>
+      <%= f.input :title, label: false, placeholder: 'Ma nouvelle liste'%>
+      <%= f.submit "Créer", class: "btn btn-success" %>
+    <% end %>
+  </div>
+  <div class="list-style d-flex flex-start flex-wrap align-items-baseline justify-content-around">
+    <%= render partial: 'shared/lists' %>
+  </div>
 </div>
 
 

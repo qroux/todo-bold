@@ -1,17 +1,22 @@
 // Place all the styles related to the lists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.create-list{
-  background-color: #ebebeb;
+.list-background{
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+                    url("https://picsum.photos/id/52/1280/853");
+  background-size: cover;
   text-align: center;
+  height: 100vh;
 }
-.list-style {
-  background-color: #ebebeb;
-  height: 88vh;
+.create-list{
 }
+// .list-style {
+//   background-color: #ebebeb;
+//   height: 88vh;
+// }
 
 input[type=text] {
-  width: 200px;
+  width: 300px;
   border: 1px solid white;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
