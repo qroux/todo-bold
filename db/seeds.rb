@@ -1,8 +1,8 @@
 #admin user
-User.create(email: 'admin@gmail.com', password: 'azerty123', admin: true)
+User.create(email: 'quentin.roux@hotmail.fr', password: 'azerty123', admin: true)
 
 # user 1
-User.create(email: 'user1@gmail.com', password: 'azerty123')
+User.create(email: 'matmmos@gmail.com', password: 'azerty123')
 
 List.create(title: 'rendez vous', user_id: User.last.id)
 Task.create(name: 'a', list_id: List.last.id)
