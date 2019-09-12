@@ -21,18 +21,26 @@
     <ul class="list-group list-group-flush">
       <% list.tasks.each do |task|  %>
         <% if task.done == false %>
-          <%= simple_form_for(task, method: :patch, url: task_path(task.id)) do |f| %>
-            <%= f.input :name, label: false, placeholder: 'Modifier'%>
-            <%= f.hidden_field :id, value: "#{task.id}" %>
-            <%= f.submit style: "display: none" %>
-          <% end %>
-          <%= link_to 'done', done_task_path(task.id), method: :patch  %>
+          <div class="d-flex justify-content-between">
+            <div>
+              <%= simple_form_for(task, method: :patch, url: task_path(task.id)) do |f| %>
+                <%= f.input :name, label: false, placeholder: 'Modifier'%>
+                <%= f.hidden_field :id, value: "#{task.id}" %>
+                <%= f.submit style: "display: none" %>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to done_task_path(task.id), method: :patch do  %>
+                <i class="far fa-check-circle m-3" id="check-icon"></i>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       <% end %>
       <%= simple_form_for @task, html: { class: "form-inline ml-auto", url: tasks_path} do |f| %>
         <%= f.input :name, label: false, placeholder: 'Ajouter tâche'%>
         <%= f.hidden_field :list_id, value: "#{list.id}" %>
-        <%= f.submit "+", class: "btn btn-success m-1 font-weight-bold" %>
+        <%= f.submit "+", class: "btn btn-success m-2 font-weight-bold" %>
       <% end %>
     </ul>
   </div>
