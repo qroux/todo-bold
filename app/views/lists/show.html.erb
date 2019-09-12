@@ -2,15 +2,34 @@
   <div class="card m-5" style="width: 500px;">
     <div class="card-header text-center">
       <% if current_user.admin == true %>
-        <%= @list.title.capitalize %> - (<%= @list.user.email %>) - list_id: <%= @list.id %>
+        <div class="d-flex justify-content-between">
+          <%= @list.title.capitalize %> - (<%= @list.user.email %>) - list_id: <%= @list.id %>
+        </div>
       <% else %>
-        <%= @list.title.capitalize %> - n°<%= @list.id %> - <%= link_to 'supprimer', list_path(@list), method: :delete, data: { confirm: 'Êtes vous sûr de vouloir supprimer définitivement cette liste et son historique ?'}  %>
+        <div class="d-flex justify-content-between">
+          <div>
+            <%= @list.title.capitalize %> -
+            n°<%= @list.id %>
+          </div>
+          <div>
+            <%= link_to list_path(@list), method: :delete, data: { confirm: 'Êtes vous sûr de vouloir supprimer définitivement cette liste et son historique ?'} do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          </div>
+        </div>
       <% end %>
     </div>
     <ul class="list-group list-group-flush">
       <% @tasks.each do |task|  %>
-        <li class="list-group-item">
-          <del><%= task.name %></del> - fait le  <%= task.updated_at.strftime("%d/%m/%Y à %H:%M") %> <%= link_to 'undo', undo_task_path(task.id), method: :patch  %>
+        <li class="list-group-item d-flex justify-content-between">
+          <div>
+            <del><%= task.name %></del> - fait le  <%= task.updated_at.strftime("%d/%m/%Y à %H:%M") %>
+          </div>
+          <div>
+            <%= link_to undo_task_path(task.id), method: :patch  do %>
+              <i class="fas fa-history"></i>
+            <% end %>
+          </div>
         </li>
       <% end %>
     </ul>
