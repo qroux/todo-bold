@@ -6,14 +6,23 @@
                     url("https://picsum.photos/id/52/1280/853");
   background-size: cover;
   text-align: center;
-  height: 100vh;
+  height: 120vh;
 }
 .create-list{
 }
-// .list-style {
-//   background-color: #ebebeb;
-//   height: 88vh;
-// }
+
+i {
+  font-size: 20px;
+}
+
+#check-icon {
+  color: red;
+  transition: 1s;
+}
+
+#check-icon:hover {
+  color: #18c46e;
+}
 
 input[type=text] {
   width: 300px;
@@ -24,7 +33,7 @@ input[type=text] {
 
 /* When the input field gets focus, change its width to 100% */
 input[type=text]:focus {
-  width: 100%;
+  width: 440px;
 }
 
 
@@ -36,6 +45,6 @@ a {
 }
 
 a:hover {
-    opacity: 0.8;
+    opacity: 1;
     text-decoration:none;
 }
