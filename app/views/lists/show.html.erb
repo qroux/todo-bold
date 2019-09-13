@@ -1,4 +1,4 @@
-<div class="list-background d-flex justify-content-center align-items-center">
+<div class="list-background d-flex justify-content-center align-items-baseline">
   <div class="card m-5" style="width: 500px;">
     <div class="card-header text-center">
       <% if current_user.admin == true %>
@@ -20,10 +20,33 @@
       <% end %>
     </div>
     <ul class="list-group list-group-flush">
-      <% @tasks.each do |task|  %>
+      <% @list.tasks.each do |task|  %>
+        <% if task.done == false %>
+          <div class="d-flex justify-content-between">
+            <div>
+              <%= simple_form_for(task, method: :patch, url: task_path(task.id)) do |f| %>
+                <%= f.input :name, label: false, placeholder: 'Modifier'%>
+                <%= f.hidden_field :id, value: "#{task.id}" %>
+                <%= f.submit style: "display: none" %>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to done_task_path(task.id), method: :patch do  %>
+                <i class="far fa-check-circle m-3" id="check-icon"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </ul>
+    <ul class="list-group list-group-flush mt-4">
+      <div class="card-header text-center">
+        Historique
+      </div>
+      <% @tasks_completed.each do |task|  %>
         <li class="list-group-item d-flex justify-content-between">
           <div>
-            <del><%= task.name %></del> - fait le  <%= task.updated_at.strftime("%d/%m/%Y à %H:%M") %>
+            <%= task.name %> - fait le  <%= task.updated_at.strftime("%d/%m/%Y à %H:%M") %>
           </div>
           <div>
             <%= link_to undo_task_path(task.id), method: :patch  do %>
