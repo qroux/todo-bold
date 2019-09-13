@@ -15,8 +15,12 @@ class ListsController < ApplicationController
   end
 
   def show
-    @tasks = @list.tasks.where(done: false)
-    @tasks_completed = @list.tasks.where(done: true)
+    if @list.nil?
+      redirect_back(fallback_location: root_path)
+    else
+      @tasks = @list.tasks.where(done: false)
+      @tasks_completed = @list.tasks.where(done: true)
+    end
   end
 
   def create
@@ -46,6 +50,10 @@ class ListsController < ApplicationController
   end
 
   def set_list
-    @list = List.find(params[:id])
+    if current_user.try(:admin?)
+      @list = List.find(params[:id])
+    else
+      @list = List.find_by(id: params[:id], user_id: current_user.id)
+    end
   end
 end
