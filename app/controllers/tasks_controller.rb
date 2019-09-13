@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   def done
     @task.done = true
     if @task.save
-      redirect_to lists_path
+      redirect_back(fallback_location: root_path)
 
       tasks = Task.where(list_id: @task.list_id, done: false)
 
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
   def undo
     @task.done = false
     if @task.save
-      redirect_to lists_path
+      redirect_back(fallback_location: root_path)
     else
       flash[:error] = "La tâche n'a pas été mise à jour"
       redirect_to lists_path

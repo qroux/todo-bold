@@ -15,7 +15,8 @@ class ListsController < ApplicationController
   end
 
   def show
-    @tasks = @list.tasks.where(done: true)
+    @tasks = @list.tasks.where(done: false)
+    @tasks_completed = @list.tasks.where(done: true)
   end
 
   def create
