@@ -3,7 +3,14 @@
     <div class="card-header text-center">
       <% if current_user.admin == true %>
         <div class="d-flex justify-content-between">
-          <%= list.title.capitalize %> - (<%= list.user.email %>) - list_id: <%= list.id %>
+          <div>
+            <%= list.title.capitalize %> - (<%= list.user.email %>) - list_id: <%= list.id %>
+          </div>
+          <div>
+            <%= link_to list_path(list.id) do %>
+              <i class="fas fa-bars"></i>
+            <% end %>
+          </div>
         </div>
       <% else %>
         <div class="d-flex justify-content-between">
