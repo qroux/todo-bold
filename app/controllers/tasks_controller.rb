@@ -47,6 +47,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def search
+    if params[:query].present?
+      @tasks = Task.first(3)
+    else
+      @tasks = Task.all.includes(:list)
+    end
+  end
+
   private
 
   def task_params

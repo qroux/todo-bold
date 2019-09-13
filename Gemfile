@@ -30,6 +30,9 @@ gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'sinatra'
 
+# Search
+gem 'pg_search'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

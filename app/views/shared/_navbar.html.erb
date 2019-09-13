@@ -1,6 +1,16 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to "Todo-Bold", lists_path, class: "navbar-brand"%>
-
+  <% if user_signed_in? %>
+    <div class="create-list d-flex flex-start">
+      <%= form_tag search_tasks_path, method: :get do %>
+        <%= text_field_tag :query,
+          params[:query],
+          placeholder: "Retrouver une tâche"
+        %>
+        <%= submit_tag "Recherche", class: "btn btn-outline-success" %>
+      <% end %>
+    </div>
+  <% end %>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
