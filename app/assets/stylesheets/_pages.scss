@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .banner {
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+                    url("https://picsum.photos/id/4/2000/1000");
+  background-size: cover;
+  text-align: center;
   color: white;
   height: 95vh;
 }
@@ -10,7 +14,4 @@
 #start-button {
   opacity: 1;
   color: white !important;
-}
-
-#start-button:hover {
 }

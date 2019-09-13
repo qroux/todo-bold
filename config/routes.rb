@@ -10,6 +10,10 @@ Rails.application.routes.draw do
       patch 'done'
       patch 'undo'
     end
+
+    collection do
+      get 'search'
+    end
   end
 
   require "sidekiq/web"

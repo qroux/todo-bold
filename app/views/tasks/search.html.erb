@@ -1,0 +1,12 @@
+<div class="list-background">
+  <div class="list-style d-flex flex-start flex-wrap align-items-baseline justify-content-around">
+    <div class="list-group pt-5" id="results">
+      <div class="list-group-item list-group-item-light">Résultats</div>
+      <% @tasks.each do |task| %>
+        <%= link_to list_path(task.list.id) do %>
+          <div class="list-group-item">liste n°<%= task.list.id %> - <%= task.name %></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
