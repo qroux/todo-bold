@@ -1,0 +1,34 @@
+<div class="list-background pt-5">
+  <div class="d-flex justify-content-center">
+    <div class="custom-devise p-5">
+      <div class="header text-center">
+        <h2>Inscription</h2>
+      </div>
+      <div class="form-group">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }%>
+          <%= f.input :password,
+                      required: true,
+                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                      label: "Mot de passe",
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      label: "Confirmation",
+                      input_html: { autocomplete: "new-password" } %>
+        </div>
+          <div class="form-actions">
+            <%= f.button :submit, "Créer", class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

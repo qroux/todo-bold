@@ -1,0 +1,28 @@
+<div class="list-background pt-5">
+  <div class="d-flex justify-content-center">
+    <div class="custom-devise p-5">
+      <div class="header text-center">
+        <h2>Connectez vous</h2>
+      </div>
+      <div class="form-group">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-inputs">
+          <%= f.input :email,
+          required: false,
+          autofocus: true,
+          input_html: { autocomplete: "email" } %>
+          <%= f.input :password,
+          required: false,
+          label: "Mot de passe",
+          input_html: { autocomplete: "current-password" } %>
+          <%= f.input :remember_me, label: "Se souvenir de moi", as: :boolean if devise_mapping.rememberable? %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, "Connexion", class: "btn-success" %>
+        </div>
+        <% end %>
+      </div>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
