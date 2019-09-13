@@ -3,8 +3,13 @@
     <div class="list-group pt-5" id="results">
       <div class="list-group-item list-group-item-light">Résultats</div>
       <% @tasks.each do |task| %>
-        <%= link_to list_path(task.list.id) do %>
-          <div class="list-group-item">liste n°<%= task.list.id %> - <%= task.name %></div>
+        <% if task.list.user_id == current_user.id %>
+          <%= link_to list_path(task.list.id) do %>
+            <div class="list-group-item">
+              <div>Liste n°<%= task.list.id %>: <%= task.list.title.capitalize %></div>
+              <div><%= task.name %></div>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>

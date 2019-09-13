@@ -3,4 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #results {
   width: 500px;
+  a {
+    opacity: 0.8;
+  }
+  a:hover {
+    opacity: 1;
+  }
 }
