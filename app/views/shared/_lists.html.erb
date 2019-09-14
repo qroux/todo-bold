@@ -47,7 +47,7 @@
       <%= simple_form_for @task, html: { class: "form-inline ml-auto", url: tasks_path} do |f| %>
         <%= f.input :name, label: false, placeholder: 'Ajouter tâche'%>
         <%= f.hidden_field :list_id, value: "#{list.id}" %>
-        <%= f.submit "+", class: "btn btn-success m-2 font-weight-bold" %>
+        <%= f.submit "+", class: "btn btn-light m-2 font-weight-bold" %>
       <% end %>
     </ul>
   </div>

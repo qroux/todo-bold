@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :lists, only: [:show, :index, :create, :destroy] do
+    member do
+      patch 'add_collaborator'
+    end
+
+    collection do
+      get 'shared'
+    end
   end
 
   resources :tasks, only: [:create, :update] do

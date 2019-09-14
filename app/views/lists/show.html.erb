@@ -55,6 +55,31 @@
           </div>
         </li>
       <% end %>
+      <div class="card-header text-center">
+        Collaborateurs
+      </div>
+      <li class="list-group-item d-flex flex-column">
+        <div>
+          <% @list.collaborators.each do |col| %>
+             <%= col %> -
+          <% end %>
+        </div>
+        <div class="mt-5">
+            <%= form_tag add_collaborator_list_path, method: :patch do %>
+              <%= text_field_tag :query,
+                params[:query],
+                placeholder: "Ajouter collaborateur"
+              %>
+              <%= submit_tag "+", class: "btn btn-outline-success" %>
+            <% end %>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
+
+
+
+
+
+
