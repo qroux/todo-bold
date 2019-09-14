@@ -60,9 +60,9 @@ class ListsController < ApplicationController
         @list.collaborators.push(params[:query])
         @list.shared = true
         @list.save
-
-        redirect_to lists_path(@list)
       end
+
+      redirect_to list_path(@list)
     else
       redirect_back(fallback_location: root_path)
     end

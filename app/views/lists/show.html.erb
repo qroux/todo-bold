@@ -1,22 +1,5 @@
 <div class="list-background d-flex justify-content-center align-items-baseline">
-  <div class="create-list d-flex flex-start p-5 form-inline">
-    <%= form_tag add_collaborator_list_path, method: :patch do %>
-      <%= text_field_tag :query,
-        params[:query],
-        placeholder: "Ajouter collaborateur"
-      %>
-      <%= submit_tag "Ajouter", class: "btn btn-outline-success" %>
-    <% end %>
 
-
-
-
-    <%= simple_form_for(@list, method: :patch, url: list_path(@list)) do |f| %>
-      <%= f.input :collaborators, label: false, placeholder: 'Ajouter collaborateur'%>
-      <%= f.submit "Ajouter", class: "btn btn-success m-1" %>
-    <% end %>
-
-  </div>
 
 
 
@@ -79,6 +62,31 @@
           </div>
         </li>
       <% end %>
+      <div class="card-header text-center">
+        Collaborateurs
+      </div>
+      <li class="list-group-item d-flex flex-column">
+        <div>
+          <% @list.collaborators.each do |col| %>
+             <%= col %> -
+          <% end %>
+        </div>
+        <div class="mt-5">
+            <%= form_tag add_collaborator_list_path, method: :patch do %>
+              <%= text_field_tag :query,
+                params[:query],
+                placeholder: "Ajouter collaborateur"
+              %>
+              <%= submit_tag "+", class: "btn btn-outline-success" %>
+            <% end %>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
+
+
+
+
+
+
