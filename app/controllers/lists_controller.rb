@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_list, only: [:show, :destroy]
+  before_action :set_list, only: [:show, :destroy, :add_collaborator]
 
   def index
     if current_user.admin == true
@@ -26,6 +26,7 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     @list.user_id = current_user.id
+    @list.collaborators.push(current_user.email)
     @list.title = 'Nouvelle liste' if @list.title == ''
     if @list.save
       redirect_to lists_path
@@ -41,6 +42,38 @@ class ListsController < ApplicationController
       flash[:error] = "La liste n'a pu être supprimée"
       redirect_to lists_path
     end
+  end
+
+  def add_collaborator
+    if params[:query].present?
+      unless User.find_by(email: params[:query]).nil?
+        @list.collaborators.push(params[:query])
+        @list.shared = true
+        @list.save
+
+        redirect_to lists_path(@list)
+      end
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def shared
+    if current_user.admin == true
+      @lists = List.where(shared: true).includes(:tasks)
+    else
+      @lists = []
+      results = List.where(shared: true)
+
+      results.each do |result|
+        if result.collaborators.include?(current_user.email)
+          @lists << result
+        end
+      end
+    end
+
+    @list = List.new(title: '')
+    @task = Task.new(name: '')
   end
 
   private

@@ -1,4 +1,28 @@
 <div class="list-background d-flex justify-content-center align-items-baseline">
+  <div class="create-list d-flex flex-start p-5 form-inline">
+    <%= form_tag add_collaborator_list_path, method: :patch do %>
+      <%= text_field_tag :query,
+        params[:query],
+        placeholder: "Ajouter collaborateur"
+      %>
+      <%= submit_tag "Ajouter", class: "btn btn-outline-success" %>
+    <% end %>
+
+
+
+
+    <%= simple_form_for(@list, method: :patch, url: list_path(@list)) do |f| %>
+      <%= f.input :collaborators, label: false, placeholder: 'Ajouter collaborateur'%>
+      <%= f.submit "Ajouter", class: "btn btn-success m-1" %>
+    <% end %>
+
+  </div>
+
+
+
+
+
+
   <div class="card m-5" style="width: 500px;">
     <div class="card-header text-center">
       <% if current_user.admin == true %>

@@ -15,7 +15,7 @@
       <% else %>
         <div class="d-flex justify-content-between">
           <div>
-            <%= list.title.capitalize %> - n°<%= list.id %>
+            <%= list.title.capitalize %> - n°<%= list.id %> - user <%= current_user.email %>
           </div>
           <div>
             <%= link_to list_path(list.id) do %>
