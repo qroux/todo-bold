@@ -50,7 +50,7 @@ class TasksController < ApplicationController
   def search
     if params[:query].present?
       # pg search also includes List.title in the research through associated model
-      @tasks = Task.kinda_spelled_like(params[:query])
+      @tasks = Task.search_by_name(params[:query])
     else
       @tasks = []
     end
