@@ -16,12 +16,9 @@ class ListsController < ApplicationController
 
   def show
     # attempt to grant #show access to collaborators
-    if @list.nil?
+    @list ||= begin
       result = List.find_by(id: params[:id])
-
-      if result.collaborators.include?(current_user.email)
-        @list = result
-      end
+      @list = result if result.collaborators.include?(current_user.email)
     end
 
     #if @list still nil after trying to grant access to collaborators
